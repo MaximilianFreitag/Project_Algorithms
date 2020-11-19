@@ -1,0 +1,88 @@
+#Coding interview problem
+
+# Problem: You are given a list consisting of 4 million random integers. 
+
+# How can you find the top 10 most frequent numbers within this list?
+ 
+ 
+ 
+ 
+ 
+ 
+#Generating pseudo random integers from 0 to 4.000.000
+
+import random
+
+list = []
+
+for i in range(0, 4000000):
+    n = random.randint(0,4000000)
+    list.append(n)
+
+
+
+
+
+#Checking whether the above code works
+
+#Length of the list
+print(len(list))
+
+#First 10 random integers from this list
+print(list[:10])
+
+
+#Output the 10 most frequent values
+#The lazy method
+
+
+from collections import Counter
+
+
+cnt = Counter(list) 
+print(cnt.most_common(10)) 
+
+
+#Visualizing the results
+
+
+
+import matplotlib.pyplot as plt
+import matplotlib.pylab as plt
+from matplotlib.pyplot import figure
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+import pandas as pd
+from pandas import Series, DataFrame
+import numpy as np
+
+
+data = cnt.most_common(10)
+
+n_groups = len(data)
+
+values = [x[1] for x in data]
+frequency = [x[0] for x in data]
+
+
+figure(num=None, figsize=(15, 6), dpi=80, facecolor='w', edgecolor='k')
+
+index = np.arange(n_groups)
+bar_width = 0.4
+
+opacity = 0.4
+
+rects1 = plt.bar(index, values, bar_width,
+                 alpha=opacity,
+                 color='g',
+                 label='Ocurrences')
+
+
+plt.xlabel('Integer value')
+plt.ylabel('Frequency')
+plt.title('Top 10 - Most frequent values')
+plt.xticks(index + bar_width, frequency)
+plt.legend()
+
+plt.tight_layout()
+plt.show()
